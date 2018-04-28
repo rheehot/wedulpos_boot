@@ -2,10 +2,18 @@ import './header.scss';
 import $ from 'jquery';
 import Common from 'common';
 import '../common/baselayout.js';
+import 'jquery-ui';
+
+// validate 필요한거
+import 'bootstrap';
+import 'validate';
+import 'jquery-validate';
 
 const $headerLogo = $('#headerLogo');
 const $loginButton = $('.loginButton');
 const $logoutButton = $('#logoutBox');
+const $loginUserTxt = $('#loginUserTxt');
+const $userInfoDialog = $('#userInfoDialog');
 
 // weather location
 const weatherLocations = [
@@ -22,6 +30,12 @@ let count = 0;
 
 const token = $("meta[name='_csrf']").attr("content");
 const token_header = $("meta[name='_csrf_header']").attr("content");
+
+// 비밀번호 변경
+const $userInfoId = $('#userInfoId');
+const $userInfoPasswd = $('#userInfoPasswd');
+const $userInfoPasswdConfirm = $('#userInfoPasswdConfirm');
+const $userInfoForm = $('#userInfoForm');
 
 // 날씨 표시
 const weatherDisplay = () => {
@@ -88,4 +102,83 @@ $loginButton.click(function(e) {
     default:
       break;
   }
+});
+
+// 비밀번호 validate
+const checkUserInfoValidate = function() {
+  // 비밀번호를 입력하지 않았을 떄
+  if (!$userInfoPasswd.val() || !$userInfoPasswdConfirm.val()) {
+    alert(Common.getMessage('common.message.password_input'));
+    return false;
+  }
+
+  // 비밀번호가 규칙에 안맞을 때
+  if (!Common.isContainUpperCase($userInfoPasswd.val()) || $userInfoPasswd.val() <= 7) {
+    alert(Common.getMessage('common.message.password'));
+    return false;
+  }
+
+  // 비밀번호가 일치하지 않을 때
+  if ($userInfoPasswd.val() != $userInfoPasswdConfirm.val()) {
+    alert(Common.getMessage('common.message.password_chk'));
+    return false;
+  }
+
+  return true;
+};
+
+// 로그인 유저 선택시 출력되는 다이얼로그
+$loginUserTxt.click(() => {
+  $userInfoDialog.dialog({
+      height: 280,
+      width: 410,
+      title: Common.getMessage('common.message.show.user'),
+      resizable:true,
+      draggable:true,
+      open: () => {
+
+      },
+      close: () => {
+        $userInfoPasswdConfirm.val('');
+        $userInfoPasswd.val('');
+      },buttons: [
+        {
+          text: Common.getMessage('common.message.confirm'),
+          icon: "ui-icon-check",
+          click: function() {
+            if (checkUserInfoValidate()) {
+              let param = {'email' : $userInfoId.val(), 'password' : $userInfoPasswd.val()};
+              param[`${token_header}`] = token;
+
+              // 임시 비밀번호 발급 요청
+              Common.sendAjax({
+                url: Common.getFullPath('user/password'),
+                param,
+                type: 'POST',
+                success: (e) => {
+                  if (e && e.length) {
+                    alert(e);
+                  } else {
+                    alert(Common.getMessage('common.message.account.password_change_success'));
+                    Common.sendAjax({url: Common.getFullPath('user/logout'), param, success: () => {
+                      Common.pageMove('');
+                    }});
+                  }
+                },
+                failed: () => {
+                  alert(Common.getMessage('common.message.fail'));
+                }
+              });
+            }
+          }
+        },
+        {
+          text: Common.getMessage('common.message.cancel'),
+          icon: "ui-icon-cancel",
+          click: function() {
+            $(this).dialog( "close" );
+          }
+        }
+      ]
+  });
 });

@@ -17,6 +17,23 @@
   width: 1040px;
 }
 
+.userInfoDiv {
+  margin-bottom: 10px;
+}
+
+.userInfoLabel {
+  font-weight: bold;
+  width: 30%;
+}
+
+.userInfoText {
+  width: 68%;
+}
+
+#loginUserTxt {
+  cursor: pointer;
+}
+
 #headerContent {
   width: 200px;
   height: 60px;

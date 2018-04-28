@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wedul.common.util.HashUtil;
 import com.wedul.wedulpos.user.dto.UserDto;
 import com.wedul.wedulpos.user.service.UserService;
 
@@ -72,5 +71,20 @@ public class UserController {
 	@RequestMapping("/cert/check")
 	public ResponseEntity<?> checkCert(String otp) throws Exception {
 		return ResponseEntity.ok(userService.checkCert(otp));
+	}
+	
+	/**
+	 * 패스워드 초기화 
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/password")
+	public ResponseEntity<?> changePassword(
+			@RequestParam String email,
+			@RequestParam String password) throws Exception {
+		return ResponseEntity.ok(userService.changePassword(email, password));
 	}
 }

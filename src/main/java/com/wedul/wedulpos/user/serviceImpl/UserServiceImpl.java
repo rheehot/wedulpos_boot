@@ -76,9 +76,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String createTempPassword(String email) throws Exception {
-
 		try {
-
 			// 사용자 체크
 			UserDto user = userDao.selectUser(new UserDto(email));
 			if (null == user) {
@@ -98,6 +96,20 @@ public class UserServiceImpl implements UserService {
 			return messageBundleUtil.getMessage("user.find.message.fail_temp_pw");
 		}
 
+	}
+
+	@Override
+	public String changePassword(String email, String password) {
+		// 사용자 체크
+		UserDto user = userDao.selectUser(new UserDto(email));
+		if (null == user) {
+			return messageBundleUtil.getMessage("user.find.message.non_exist_email");
+		}
+		
+		user.setPassword(password);
+		userDao.updateTempPw(user);
+		
+		return "";
 	}
 
 }

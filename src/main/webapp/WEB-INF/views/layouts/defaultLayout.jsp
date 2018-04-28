@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false'>
+<body oncontextmenu="return true" ondragstart="return true" onselectstart="return true">
 	<div id="layoutHeader">
 		<tiles:insertAttribute name="header" />
 	</div>

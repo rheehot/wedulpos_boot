@@ -51,4 +51,12 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	String createTempPassword(String email) throws Exception;
+
+	/**
+	 * 비밀번호 변경 
+	 * 
+	 * @param email
+	 * @param password
+	 */
+	String changePassword(String email, String password);
 }
