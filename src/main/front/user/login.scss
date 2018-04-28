@@ -1,0 +1,45 @@
+#loginContainer {
+  max-width: 29.25rem !important;
+}
+
+#password, #email, #passwordCheck {
+  margin-bottom: 10px;
+}
+
+.login-help {
+  font-size: 16px;
+  text-align: right;
+}
+
+.login-help a {
+  letter-spacing: -1px;
+  color: #777;
+}
+
+.login-help a.last {
+  margin-left: 6px;
+  padding-left: 6px;
+  margin-right: 0;
+}
+
+.container {
+  padding-top: 120px;
+}
+
+#findPwSubMsg{
+  padding-bottom: 3px;
+}
+
+.joinOtpBox {
+    margin-bottom: 10px;
+}
+
+.otpBox {
+    width: 21%;
+    display:inline-block;
+    text-align: center;
+}
+
+.marginBox10 {
+  margin-bottom: 10px;
+}

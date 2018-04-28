@@ -1,0 +1,99 @@
+@import "../common/baselayout.scss";
+
+.sidebarMenu {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
+.menuBox {
+    height: 55px;
+}
+
+#menuList .menuBox h2 {
+  border: 1px solid #e3e9ec;
+}
+
+#menuList .menuBox h2 a {
+  display: block;
+  padding: 0 30px;
+  font-size: 15px;
+  line-height: 56px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+li {
+  cursor: pointer;
+}
+
+.menuClickIcon {
+  position: absolute;
+  right: 29px;
+  margin-top: 23px;
+}
+
+.sidebarBottom {
+  position: fixed;
+  bottom: 16px;
+  width: 220px;
+  border-top: 1px solid #e3e9ec;
+}
+
+.sidebarBottom strong {
+  display: block;
+  position: relative;
+}
+
+.sidebarBottom strong a {
+  display: block;
+  padding: 8px 29px 0 30px ;
+  height: 40px;
+  line-height: 40px;
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#wedulManagerIcon {
+  @extend .imageBox24;
+  background-image: url('../images/wedulmanager-log.png');
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  z-index: 3;
+  margin-right: 9px;
+}
+
+#naverIcon {
+  @extend .imageBox24;
+  background-image: url('../images/naver-log.png');
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  z-index: 3;
+  margin-right: 9px;
+}
+
+.menuSelected {
+  color: #3f9eff !important;
+}
+
+.subMenu {
+  background-color: #f7f9fb;
+  max-height: 500px;
+  font-size: 14px;
+  line-height: 2.42857;
+  color: #333;
+  margin-top: -20px;
+}
+
+.subMenuSelected {
+  color: #38454d;
+  font-weight: 700;
+  text-decoration: underline;
+}

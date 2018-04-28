@@ -1,0 +1,85 @@
+#sidebar {
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  width: 220px;
+  min-height: 600px;
+  border-right: 1px solid #cdd1d6;
+  background-color: #fff;
+  z-index: 100;
+}
+
+#content {
+  left:230px;
+  top: 70px;
+  height: 100%;
+  position: fixed;
+  padding: 15px 12px 60px;
+  border: 1px solid #d4d9dc;
+  background-color: #fff;
+  width: 1020px;
+}
+
+#layoutHeader {
+  height: 60px;
+  border: 0;
+  background-color: #252d30;
+}
+
+#layoutBody {
+  height: calc(100% - 60px);
+  background-color: #E8ECEF;
+}
+
+HTML {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin:0px !important;
+  font-family: 'Nanum Gothic', 'serif';
+}
+
+.sideBarBox {
+  height: 100%;
+}
+
+.displayInline {
+ display: inline-block;
+}
+
+#notification {
+  background-color: rgba(255, 255, 255, 0.19);
+  height: 28px;
+  padding-left: 8px;
+  padding-right: 8px;
+  fill: rgb(255, 255, 255);
+  margin-left: 3px;
+  border-radius: 4px;
+}
+
+.padding15 {
+  padding: 15px;
+}
+
+.displayNone {
+  display: none;
+}
+
+.topBorder{
+  border-top: solid 1px #aaa;
+}
+
+.imageBox24 {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border-radius: 25px;
+}
+
+.imageText {
+  display: inline-block;
+  margin-bottom: 10px;
+  vertical-align: middle;
+}

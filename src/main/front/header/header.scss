@@ -1,0 +1,79 @@
+#headerLogo {
+    background-image: url('../images/white-logo.png');
+    background-repeat: no-repeat;
+    width: 219px;
+    height: 60px;
+    z-index: 3;
+    margin-left: 5px;
+    margin-top: 2px;
+    position: fixed;
+    cursor: pointer;
+}
+
+.headerBody {
+  position: fixed;
+  left: 220px;
+  height: 60px;
+  width: 1040px;
+}
+
+#headerContent {
+  width: 200px;
+  height: 60px;
+  right: 0px;
+  position: absolute;
+}
+
+.loginArea {
+  color: #00CCA3;
+  position: absolute;
+  right: 0;
+  top: 17px;
+}
+
+#loginAfterArea {
+  width : 300px;
+}
+
+#logoutBox {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#loginUserIdBox {
+  display: inline-block;
+  width: 66%;
+}
+
+.weatherArea {
+  width:200px;
+  position: absolute;
+  top: 5px;
+  color: #fff;
+  z-index: 3px;
+  height: 60px;
+}
+
+#joinBox, #loginBox {
+  font-size: 15px;
+  display: inline-block;
+  letter-spacing: -.02em;
+  font-weight: 400;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+#weatherIcon {
+  position: absolute;
+}
+
+#weatherMessage {
+  position: absolute;
+  top:20px;
+  top: 12px;
+  left: 55px;
+}
+
+.displayNone {
+  display: none;
+}
