@@ -59,4 +59,12 @@ public interface UserService {
 	 * @param password
 	 */
 	String changePassword(String email, String password);
+
+	/**
+	 * nick name check
+	 * 
+	 * @param nickName
+	 * @return
+	 */
+	String checkNickname(String nickname);
 }

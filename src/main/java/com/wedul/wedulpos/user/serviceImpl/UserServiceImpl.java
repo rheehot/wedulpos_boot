@@ -64,6 +64,24 @@ public class UserServiceImpl implements UserService {
 			return messageBundleUtil.getMessage("user.join.message.failEmail");
 		}
 	}
+	
+	@Override
+	public String checkNickname(String nickname) {
+		try {
+			// 이미 사용중인 이메일인지 확인
+			UserDto user = new UserDto();
+			user.setNickname(nickname);
+			if (null != userDao.selectUser(user)) {
+				return messageBundleUtil.getMessage("user.join.message.alreadyNickName");
+			}
+
+			return "";
+
+		} catch (Exception ex) {
+			logger.error("send error", ex);
+			return messageBundleUtil.getMessage("user.join.message.failNickname");
+		}
+	}
 
 	@Override
 	public boolean checkCert(String otp) throws Exception {

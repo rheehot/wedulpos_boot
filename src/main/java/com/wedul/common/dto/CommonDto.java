@@ -1,5 +1,7 @@
 package com.wedul.common.dto;
 
+import lombok.Data;
+
 /**
  * 공통 dto 클래
  * 
@@ -7,14 +9,7 @@ package com.wedul.common.dto;
  * @date 2017. 11. 4.
  * @name CommonDto
  */
+@Data
 public class CommonDto {
 	private int idx;
-
-	public int getIdx() {
-		return idx;
-	}
-
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
 }

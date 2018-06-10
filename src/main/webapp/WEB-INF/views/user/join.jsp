@@ -8,14 +8,20 @@
     <h2 class="form-signin-heading"><spring:message code="user.login.message.join"/></h2>
     <br>
 
-	<!-- ÀÌ¸ÞÀÏ -->
+	<!-- ï¿½Ì¸ï¿½ï¿½ï¿½ -->
+    <div class="marginBox10">
+      <label for="inputJoinNickName" class="sr-only"></label>
+      <input type="text" id="joinNickName" style="width: 71%; display:inline-block;" name="nickname" class="form-control" placeholder="<spring:message code="user.login.message.nickName"/>" required="">
+      <button type="button" id="nickNameCheckBtn" style="display:inline-block; margin-bottom: 3px;" class="checkbtn btn btn-info"><spring:message code="user.login.message.nickNameCheck"/></button>
+    </div>
+
     <div class="marginBox10">
       <label for="inputJoinEmail" class="sr-only"></label>
       <input type="email" id="joinEmail" style="width: 71%; display:inline-block;" name="email" class="form-control" placeholder="<spring:message code="user.login.message.email"/>" required="">
-      <button type="button" id="emailCheckBtn" style="display:inline-block; margin-bottom: 3px;" class="btn btn-info"><spring:message code="user.login.message.emailCheck"/></button>
+      <button type="button" id="emailCheckBtn" style="display:inline-block; margin-bottom: 3px;" class="checkbtn btn btn-info"><spring:message code="user.login.message.emailCheck"/></button>
     </div>
-    
-    <!-- ÀÎÁõ¹øÈ£ È®ÀÎ -->
+
+    <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ È®ï¿½ï¿½ -->
     <div id="joinOtpBox" class="joinOtpBox marginBox10 displayNone">
       <label for="inputEmail" class="sr-only"></label>
       <input type="text" id="otpNum" style="width: 54%; display:inline-block;" name="otpNum" class="form-control" placeholder="<spring:message code="user.login.message.cert_number"/>">
@@ -28,7 +34,7 @@
     <label for="inputPassword" class="sr-only"><spring:message code="user.login.message.password"/></label>
     <input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="user.login.message.password"/>" required="">
     <input type="password" id="passwordCheck" name="passwordCheck" class="form-control" placeholder="<spring:message code="user.login.message.passwordCheck"/>" required="">
-    <button id="joinBtn" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.message.login"/></button>
+    <button id="joinBtn" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.message.join"/></button>
   </form>
 </div>
 

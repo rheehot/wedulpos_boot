@@ -6,8 +6,6 @@ import 'jquery-ui';
 
 // validate 필요한거
 import 'bootstrap';
-import 'validate';
-import 'jquery-validate';
 
 const $headerLogo = $('#headerLogo');
 const $loginButton = $('.loginButton');
@@ -130,7 +128,7 @@ const checkUserInfoValidate = function() {
 // 로그인 유저 선택시 출력되는 다이얼로그
 $loginUserTxt.click(() => {
   $userInfoDialog.dialog({
-      height: 280,
+      height: 320,
       width: 410,
       title: Common.getMessage('common.message.show.user'),
       resizable:true,

@@ -16,7 +16,7 @@
       </h2>
   	</div>
 
-    <!-- �쇱�� -->
+    <!-- schedule -->
   	<div id="scheduleMenuBox" class="menuBox">
       <h2>
         <a id="scheduleMenu" class="menuA">
@@ -27,7 +27,7 @@
       </h2>
   	</div>
 
-    <!-- 媛�怨�遺� -->
+    <!-- money -->
   	<div id="moneyMenuBox" class="menuBox">
       <h2>
         <a id="moneyMenu" class="menuA">
@@ -45,9 +45,20 @@
         </ul>
       </div>
   	</div>
+  	
+ 	<!-- message -->
+  	<div id="messageMenuBox" class="menuBox">
+      <h2>
+        <a id="messageMenu" class="menuA">
+          <i class="fas fa-comments menuIcon"></i>
+          <span class="sidebarMenu"><spring:message code='common.message.message'/></span>
+          <i class="menuClickIcon menuIcon"></i>
+        </a>
+      </h2>
+  	</div>
   </div>
 
-  <!-- ���⑤� -->
+  <!-- foot -->
   <div class="sidebarBottom">
     <div class="sideBottomCon">
       <strong>

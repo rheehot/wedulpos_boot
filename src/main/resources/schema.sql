@@ -4,6 +4,7 @@ CREATE DATABASE IF NOT EXISTS wedulpos DEFAULT CHARACTER SET UTF8;
 -- User 테이블 생성
 CREATE TABLE IF NOT EXISTS `wedulpos`.`user` (
   `idx` INT NOT NULL AUTO_INCREMENT COMMENT '고유 인덱스',
+  `nickname` VARCHAR(255) NULL COMMENT '별명',
   `email` VARCHAR(255) NULL COMMENT '이메일',
   `password` TEXT NOT NULL COMMENT '비밀번호',
   `isadmin` BOOLEAN NOT NULL DEFAULT 0 COMMENT '최고관리자 여부',

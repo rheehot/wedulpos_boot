@@ -100,6 +100,18 @@ public class PageController {
 		response.sendError(404);
 		return null;
 	}
+	
+	/**
+	 * 메시지 화면 
+	 * 
+	 * @param respons
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping("/message")
+	public String message(HttpServletResponse respons) throws IOException {
+		return "message";
+	}
 }
 
 

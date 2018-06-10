@@ -36,18 +36,25 @@
   <!-- User Info Dialog -->
   <div id="userInfoDialog" class="displayNone">
   	<form id="userInfoForm" class="form-signin" onsubmit="return false;" method="post">
+
+      <!-- nickname -->
+	  	<div class="userInfoDiv">
+		  	<label for="userInfoNickname" class="userInfoLabel"><spring:message code="common.message.account.nickname"/></label>
+			  <input type="text" id="userInfoNickname" value="${loginUserNickname}" class="userInfoText" disabled required="">
+		</div>
+
 	  	<!-- id -->
 	  	<div class="userInfoDiv">
 		  	<label for="userInfoId" class="userInfoLabel"><spring:message code="common.message.account.id"/></label>
 			<input type="text" id="userInfoId" value="${loginUser}" class="userInfoText" disabled required="">
 		</div>
-		
+
 		<!-- password -->
 		<div class="userInfoDiv">
 		  	<label for="userInfoPasswd" class="userInfoLabel"><spring:message code="common.message.account.passwd"/></label>
 			<input type="password" id="userInfoPasswd" value="" class="userInfoText" required="">
 		</div>
-		
+
 		<!-- password confirm -->
 		<div class="userInfoDiv">
 		  	<label for="userInfoPasswdConfirm" class="userInfoLabel"><spring:message code="common.message.account.passwd_confirm"/></label>

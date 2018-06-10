@@ -32,9 +32,10 @@ public class UserController {
 	 */
 	@RequestMapping("/join")
 	public ResponseEntity<?> join(
+			@RequestParam String nickname,
 			@RequestParam String email,
 			@RequestParam String password) throws Exception {
-		return ResponseEntity.ok(userService.insertUser(new UserDto(email, password, false)));
+		return ResponseEntity.ok(userService.insertUser(new UserDto(email.trim(), password.trim(), nickname.trim(), false)));
 	}
 	
 	/**
@@ -46,7 +47,19 @@ public class UserController {
 	 */
 	@RequestMapping("/email")
 	public ResponseEntity<?> checkEmail(String email) throws Exception {
-		return ResponseEntity.ok(userService.checkEmail(email));
+		return ResponseEntity.ok(userService.checkEmail(email.trim()));
+	}
+	
+	/**
+	 * nickname check
+	 * 
+	 * @param nickName
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/nickname")
+	public ResponseEntity<?> checkNickName(String nickname) throws Exception {
+		return ResponseEntity.ok(userService.checkNickname(nickname.trim()));
 	}
 	
 	/**
@@ -58,7 +71,7 @@ public class UserController {
 	 */
 	@RequestMapping("/send/temppw")
 	public ResponseEntity<?> createTempPw(String email) throws Exception {
-		return ResponseEntity.ok(userService.createTempPassword(email));
+		return ResponseEntity.ok(userService.createTempPassword(email.trim()));
 	}
 	
 	/**
@@ -70,7 +83,7 @@ public class UserController {
 	 */
 	@RequestMapping("/cert/check")
 	public ResponseEntity<?> checkCert(String otp) throws Exception {
-		return ResponseEntity.ok(userService.checkCert(otp));
+		return ResponseEntity.ok(userService.checkCert(otp.trim()));
 	}
 	
 	/**
@@ -85,6 +98,6 @@ public class UserController {
 	public ResponseEntity<?> changePassword(
 			@RequestParam String email,
 			@RequestParam String password) throws Exception {
-		return ResponseEntity.ok(userService.changePassword(email, password));
+		return ResponseEntity.ok(userService.changePassword(email.trim(), password.trim()));
 	}
 }

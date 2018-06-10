@@ -12,7 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM
 		wedulpos.user
 	<where>
-		email = #{email}
+		<if test="email != null and email != ''">
+			email = #{email}
+		</if>
+		<if test="nickname != null and nickname != ''">
+			nickname = #{nickname}
+		</if>
 	</where>
 	</select>
 	
@@ -32,12 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	INSERT INTO
 		wedulpos.user
 	(
+		nickname,
 		password,
 		email,
 		isadmin
 	)
 	VALUES
 	(
+		#{nickname},
 		#{ecPassword},
 		#{email},
 		#{isadmin}

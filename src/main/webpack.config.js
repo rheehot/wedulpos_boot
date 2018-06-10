@@ -8,7 +8,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  mode: 'development',
   context: path.resolve(__dirname, 'front'),
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? "warning" : false
+  },
   entry: {  // entry 경로
    'main/main': './main/main.js',
    'error/error' : './error/error.js',
@@ -17,7 +21,8 @@ module.exports = {
    'menu/menu' : './menu/menu.js',
    'user/login' : './user/login.js',
    'user/findpw' : './user/findpw.js',
-   'user/join' : './user/join.js'
+   'user/join' : './user/join.js',
+   'message/message' : './message/message.js'
   },
   output: { // output 경로
     path: path.resolve(__dirname, 'webapp/dist'),
@@ -30,14 +35,15 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /(validate|node_modules|spin|jquery|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
+        exclude: /(validate|node_modules|spin|jquery|stomp-websocket|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
       },
       {
         test: /\.js$/,  // es5 문법에서도 적용되도록 수정
         loader: 'babel-loader',
         exclude: /(node_modules|jquery)/,
         query: {
-          presets: ['es2015']
+          presets: ['es2015'],
+          compact: false
         }
       },
       {
@@ -70,19 +76,18 @@ module.exports = {
       'fontawesome' : path.resolve(__dirname, 'front/lib/fontawesome/js/fontawesome-all.min.js'),
       'bootstrap' : path.resolve(__dirname, 'front/lib/bootstrap/bootstrap.min.js'),
       'spin': 'spin/spin.js',
-      'validate' : path.resolve(__dirname, 'front/lib/jquery.validate.min.js'),
-      'jquery-validate' : path.resolve(__dirname, 'front/lib/jquery-validate.bootstrap-tooltip.min.js'),
-      'tether' : 'tether/dist/js/tether.min.js'
+      'tether' : 'tether/dist/js/tether.min.js',
+      'sockjs-client' : 'sockjs-client/dist/sockjs.min.js'
     }
   },
   // 압축 및 난독화 ( 난독화와 코드 압축을 위한 플러그인 )
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
+  // plugins: [
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     compress: {
+  //       warnings: false
+  //     }
+  //   })
+  // ]
   // Source Map 플러그인 ( 소스 맵 확인을 위한 플러그인 )
-  // devtool: '#inline-source-map'
+  devtool: '#inline-source-map'
 }

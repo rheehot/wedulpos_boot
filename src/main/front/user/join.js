@@ -6,8 +6,6 @@ import Spinner from 'spin';
 
 // validate 필요한거
 import 'bootstrap';
-import 'validate';
-import 'jquery-validate';
 
 let isCheckEmail = false;
 let initialTime;
@@ -23,29 +21,30 @@ const $passwordCheck = $('#passwordCheck');
 const $joinBtn = $('#joinBtn');
 const $joinForm = $('#joinForm');
 
-$.validator.addMethod('passwordChkVal', function(value /*,element*/) {
-  return value && Common.isContainUpperCase(value) && value.length > 7;
-});
-
-$.validator.addMethod('passwordReChkVal', function(value /*,element*/) {
-  return value && Common.isContainUpperCase(value) && value.length > 7 && $password.val() == $passwordCheck.val();
-});
+let isCheckNickName = false;
+const $nickNameCheckBtn = $('#nickNameCheckBtn');
+const $joinNickName = $('#joinNickName');
 
 // join btn
 $joinBtn.click(() => {
+  if (!isCheckNickName) {
+    alert(Common.getMessage('user.join.message.checkNickname'));
+    return;
+  }
+
   if (!isCheckEmail) {
     alert(Common.getMessage('user.join.message.checkEmail'));
     return;
   }
 
-  if (!$password.val() || !$passwordCheck.val()) {
-    alert(Common.getMessage('user.join.message.checkPassword'));
+  if (!Common.passwordValidate($password.val()) || !Common.passwordValidate($passwordCheck.val()) ) {
+    alert(Common.getMessage('common.message.password'));
     return;
   }
 
   if ($password.val() != $passwordCheck.val()) {
-    alert(Common.getMessage('user.join.message.checkPassword'));
-    return;
+    alert(Common.getMessage('common.message.password_chk'));
+    return false;
   }
 
   // 회원가입 요청
@@ -62,23 +61,40 @@ $joinBtn.click(() => {
   });
 });
 
-// joinForm validate
-$('#joinForm').validate({
-  rules: {
-    email: {email:true, required:true},
-    password: {passwordChkVal:true, required:true},
-    passwordCheck: {passwordReChkVal:true, required:true}
-  },
-  messages: {
-    email: Common.getMessage('user.join.message.checkEmail'),
-    password: Common.getMessage('user.join.message.password'),
-    passwordCheck: Common.getMessage('user.join.message.passwordCheck')
-  },
-  tooltip_options: {
-    email: {placement:'right',html:true, trigger:'focus'},
-    password: {html:true, trigger:'focus'},
-    passwordCheck: {placement:'right',html:true, trigger:'focus'}
+// nickNme check
+$nickNameCheckBtn.click(() => {
+  if (!$joinNickName.val()) {
+    alert(Common.getMessage('user.join.message.validate_nickname'));
+    return;
   }
+
+  if (isCheckNickName) {
+    alert(Common.getMessage('user.join.message.already_check'));
+    return;
+  }
+
+  var spinner = new Spinner({color:'#000', lines: 12}).spin(document.getElementById('joinForm'));
+
+  // 이메일 체크 요청
+  Common.sendAjax({
+    url: Common.getFullPath('user/nickname'),
+    param: { 'nickname' : $joinNickName.val() },
+    type: 'POST',
+    success: (e) => {
+      if (e && e.length) {
+        alert(e);
+        spinner.stop();
+      } else {
+        isCheckNickName = true;
+        alert(Common.getMessage('user.join.message.already_check'));
+        spinner.stop();
+      }
+    },
+    failed: () => {
+      alert(Common.getMessage('common.message.fail'));
+      spinner.stop();
+    }
+  });
 });
 
 // email 확인 버튼 클릭

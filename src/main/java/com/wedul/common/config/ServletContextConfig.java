@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.wedul.common.interceptor.AlwaysInterceptor;
@@ -31,10 +31,9 @@ import com.wedul.wedulpos.variables.service.VariablesServiceImpl;
  * @date 2017. 6. 17.
  */
 @Configuration
-@EnableWebMvc // <annotation-driven /> 
+@EnableWebMvc // <annotation-driven /> // WebMvcConfiguration에서 구성한 스프링 MVC 구성을 불러올 수 있다. 
 @ComponentScan(basePackages = {"com.wedul.*", "com.wedul.common.interceptor" })
-public class ServletContextConfig extends
-WebMvcConfigurerAdapter {
+public class ServletContextConfig implements WebMvcConfigurer {
 
 	@Bean
 	public ViewResolver getViewResolver() {
@@ -53,7 +52,6 @@ WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		// Always Interceptor
 		registry.addInterceptor(alwaysInterceptor()).addPathPatterns("/**").excludePathPatterns("/weather");
-		super.addInterceptors(registry);
 	}
 	
 	/**
@@ -72,7 +70,6 @@ WebMvcConfigurerAdapter {
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(converter());
-		super.configureMessageConverters(converters);
 	}
 
 	@Bean

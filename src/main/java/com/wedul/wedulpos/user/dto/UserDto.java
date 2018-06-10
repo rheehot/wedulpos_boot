@@ -5,6 +5,9 @@ import org.apache.ibatis.type.Alias;
 import com.wedul.common.dto.CommonDto;
 import com.wedul.common.util.HashUtil;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * User정보 Dto 
  * 
@@ -13,7 +16,10 @@ import com.wedul.common.util.HashUtil;
  * @name UserDto
  */
 @Alias("UserDto")
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class UserDto extends CommonDto {
+	private String nickname;
 	private String email;
 	private String password;
 	private boolean isadmin;
@@ -35,28 +41,11 @@ public class UserDto extends CommonDto {
 		this.isadmin = isadmin;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
+	public UserDto(String email, String password, String nickname, boolean isadmin) {
 		this.email = email;
-	}
-	
-	public boolean isIsadmin() {
-		return isadmin;
-	}
-
-	public void setIsadmin(boolean isadmin) {
-		this.isadmin = isadmin;
-	}
-
-	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public String getPassword() {
-		return this.password;
+		this.nickname = nickname;
+		this.isadmin = isadmin;
 	}
 	
 	public String getEcPassword() {

@@ -87,7 +87,7 @@ public class RootApplicationContextConfig {
 	    
 	// Message bundle
 	@Bean
-	 public MessageBundleUtil messageBundleUtil(MessageSource source) throws Exception {
+	public MessageBundleUtil messageBundleUtil(MessageSource source) throws Exception {
         MessageSourceAccessor accessor = new MessageSourceAccessor(source);
         MessageBundleUtil util = new MessageBundleUtil();
         util.setMessageSourceAccessor(accessor);
@@ -132,7 +132,8 @@ public class RootApplicationContextConfig {
                 "classpath:tiles/tiles.xml",
                 "classpath:tiles/todo-tiles.xml",
                 "classpath:tiles/money-tiles.xml",
-                "classpath:tiles/schedule-tiles.xml"
+                "classpath:tiles/schedule-tiles.xml",
+                "classpath:tiles/message-tiles.xml"
         });
         return tilesConfigurer;
     }

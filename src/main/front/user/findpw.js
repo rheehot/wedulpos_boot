@@ -6,25 +6,10 @@ import Spinner from 'spin';
 
 // validate 필요한거
 import 'bootstrap';
-import 'validate';
-import 'jquery-validate';
 
 const $findPw = $('#findPw');
 const $findForm = $('#findForm');
 const $findEmail = $('.findEmail');
-
-// findForm validate
-$('#findForm').validate({
-  rules: {
-    email: {email:true, required:true}
-  },
-  messages: {
-    email: Common.getMessage('user.join.message.checkEmail')
-  },
-  tooltip_options: {
-    email: {placement:'right',html:true, trigger:'focus'}
-  }
-});
 
 // find form 추가 버튼
 $findPw.click(() => {

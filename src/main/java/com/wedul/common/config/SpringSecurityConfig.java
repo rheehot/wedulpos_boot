@@ -42,6 +42,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 								   "/user/password/find",
 								   "/user/join",
 								   "/user/email",
+								   "/user/nickname",
 								   "/user/send/temppw",
 								   "/findpw", 
 								   "/user/findpw",

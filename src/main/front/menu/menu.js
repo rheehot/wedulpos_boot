@@ -14,6 +14,7 @@ const currentPage = location.href;
 const $todoMenu = $('#todoMenu');
 const $scheduleMenu = $('#scheduleMenu');
 const $moneyMenu = $('#moneyMenu');
+const $messageMenu = $('#messageMenu');
 
 // menu icon
 const $moneyMenuIcon = $('#moneyMenuIcon');
@@ -51,6 +52,8 @@ var selectCurrPageMenu = function() {
     } else if ( currentPage.indexOf('money/setting') > 0 ) {
       $moneySetting.addClass('subMenuSelected');
     }
+  } else if ( currentPage.indexOf('message') > 0 ) { // message
+    $messageMenu.addClass('menuSelected');
   }
 };
 selectCurrPageMenu();
@@ -66,6 +69,10 @@ $menuA.click(function(e) {
       break;
     case 'moneyMenu':
       Common.pageMove('money/month');
+      break;
+    case 'messageMenu':
+      Common.pageMove('message');
+      break;
     default:
       break;
   }
@@ -98,7 +105,7 @@ $wedulManagerBox.click(function() {
 
 // 블로그 클릭 시 이동
 $naverBlogBox.click(function() {
-  window.open('https://rokking1.blog.me', '_blank');
+  window.open('http://wedul.tistory.com', '_blank');
 });
 
 // 메뉴 페이지 이동.

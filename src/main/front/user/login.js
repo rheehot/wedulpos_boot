@@ -5,8 +5,6 @@ import Common from 'common';
 
 // validate 필요한거
 import 'bootstrap';
-import 'validate';
-import 'jquery-validate';
 
 const $loginForm = $('#loginForm');
 const $id = $('#email');

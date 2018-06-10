@@ -26,6 +26,7 @@ public class AlwaysInterceptor extends
 		loginUser = SessionUtil.getCurrentUser();
 		if (null != loginUser) {
 			request.setAttribute("loginUser", loginUser.getEmail());
+			request.setAttribute("loginUserNickname", loginUser.getNickname());
 		}
 		request.setAttribute("projectName", "Wedul Pos");
 		return true;
