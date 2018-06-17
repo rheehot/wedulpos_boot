@@ -1,15 +1,59 @@
-//import Common from 'common';
+import Common from 'common';
 import '../header/header.js';
 import $ from 'jquery';
 import SockJS from 'sockjs-client';
 import Stomp from '@stomp/stompjs';
+import './message.scss';
+import Choices from 'choices';
 
-const $chatBox = $('.chat_box');
+const $chatBox = $('.chatBox');
 const $messageInput = $('#messageBox');
 const $sendBtn = $('.send');
+const messageTargetInput = document.getElementById('messageTargetInput');
+const $messageBox = $('#messageBox');
+const $messageTextBox = $('#messageTextBox');
 
 const sock = new SockJS('/stomp-chat');
 const client = Stomp.over(sock); // 1. SockJS를 내부에 들고 있는 client를 내어준다.
+const choices = new Choices(messageTargetInput, {
+  delimiter: ',',
+  editItems: true,
+  maxItemCount: 1,
+  removeItemButton: true,
+  addItemText: function(value) {
+    return 'Please Enter to add user <b>"' + String(value) + '"</b>';
+  },
+});
+
+messageTargetInput.addEventListener('addItem', (event) => {
+  // do something creative here...
+  console.log(event.detail.id);
+  console.log(event.detail.value);
+  console.log(event.detail.label);
+  console.log(event.detail.groupValue);
+  //choices.removeItemsByValue(event.detail.value);
+}, false);
+
+messageTargetInput.addEventListener('removeItem', (event) => {
+
+  if (!confirm(Common.getMessage('message.message.close'))) {
+    choices.setValue([
+      {value: event.detail.value, label: event.detail.label}
+    ]);
+  }
+
+  // do something creative here...
+  console.log(event.detail.id);
+  console.log(event.detail.value);
+  console.log(event.detail.label);
+  console.log(event.detail.groupValue);
+
+}, false);
+
+// 채팅 열기
+// const openChatRoom = function() {
+//
+// };
 
 // 2. connection이 맺어지면 실행된다.
 client.connect({}, function () {
@@ -19,7 +63,14 @@ client.connect({}, function () {
   client.subscribe('/subscribe/chat/room/' + $('.content').data('room-id'), function (chat) {
     let content = JSON.parse(chat.body);
     $chatBox.append('<li>' + content.message + '(' + content.writer + ')</li>');
+    $messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
   });
+});
+
+$messageBox.keydown((e) => {
+  if (e.keyCode == 13) {
+    $sendBtn.trigger('click');
+  }
 });
 
 $sendBtn.click(function () {
