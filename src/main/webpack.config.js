@@ -35,7 +35,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /(validate|node_modules|spin|jquery|stomp-websocket|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
+        exclude: /(validate|choices|node_modules|spin|jquery|stomp-websocket|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
       },
       {
         test: /\.js$/,  // es5 문법에서도 적용되도록 수정
@@ -45,6 +45,13 @@ module.exports = {
           presets: ['es2015'],
           compact: false
         }
+      },
+      {
+          test: /\.svg/,
+          use: {
+              loader: 'svg-url-loader',
+              options: {}
+          }
       },
       {
         test: /\.css$/,  // css 파일을 import 할때 오류가 발생하는데 그것을 오류가 안나게 해주는 기능
@@ -62,7 +69,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|svg|gif)$/,
         loader: 'file-loader?name=images/[name].[ext]'
       }
     ]
@@ -77,7 +84,8 @@ module.exports = {
       'bootstrap' : path.resolve(__dirname, 'front/lib/bootstrap/bootstrap.min.js'),
       'spin': 'spin/spin.js',
       'tether' : 'tether/dist/js/tether.min.js',
-      'sockjs-client' : 'sockjs-client/dist/sockjs.min.js'
+      'sockjs-client' : 'sockjs-client/dist/sockjs.min.js',
+      'choices' : path.resolve(__dirname, 'front/lib/choices.js/scripts/dist/choices.js')
     }
   },
   // 압축 및 난독화 ( 난독화와 코드 압축을 위한 플러그인 )

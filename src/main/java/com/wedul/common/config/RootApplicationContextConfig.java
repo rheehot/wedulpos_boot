@@ -105,6 +105,7 @@ public class RootApplicationContextConfig {
 								   "classpath:messages/error/error", 
 								   "classpath:messages/money/money", 
 								   "classpath:messages/schedule/schedule",
+								   "classpath:messages/message/message",
 								   "classpath:messages/todo/todo",
 								   "classpath:messages/user/user");
 	    return messageSource;

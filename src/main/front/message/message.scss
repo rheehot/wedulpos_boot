@@ -1,0 +1,57 @@
+// @import '../lib/choices.js/assets/styles/scss/base.scss';
+// @import '../lib/choices.js/assets/styles/scss/choices.scss';
+
+#messageTargetSearch {
+  width: 400px;
+}
+
+#messageTargetInput {
+  display: inline-block;
+  width: 70%;
+}
+
+#messageTargetLabel {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+#messageTargetInputBox {
+  position: absolute;
+  bottom: 17px;
+  width: 100%;
+}
+
+#messageBox {
+  width: 89%;
+  display: inline-block;
+  resize: none;
+}
+
+#messageArea {
+  position: relative;
+  height: 91%;
+  margin-top: 17px;
+}
+
+#messageBoxBtn {
+  display: inline-block;
+  width: 10%;
+  position: absolute;
+  height: 80%;
+  margin-left: 7px;
+}
+
+#messageTextBox {
+  height: 77%;
+  border: 1px solid #DDDDDD;
+  position: absolute;
+  top: 0;
+  border-radius:2.5px;
+  width: 100%;
+  overflow: scroll;
+}
+
+.chatBox {
+  width: 100%;
+  height: 100%;
+}

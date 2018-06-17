@@ -75,7 +75,7 @@ $nickNameCheckBtn.click(() => {
 
   var spinner = new Spinner({color:'#000', lines: 12}).spin(document.getElementById('joinForm'));
 
-  // 이메일 체크 요청
+  // 별명 체크 요청
   Common.sendAjax({
     url: Common.getFullPath('user/nickname'),
     param: { 'nickname' : $joinNickName.val() },
