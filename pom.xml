@@ -6,7 +6,7 @@
 	<groupId>com.wedul</groupId>
 	<artifactId>wedulpos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>wedulpos</name>
 	<description>wedulpos</description>
@@ -22,7 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<tiles-version>3.0.7</tiles-version>
+		<tiles-version>3.0.8</tiles-version>
+		<docker.image.prefix>wedul</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -122,7 +123,7 @@
 		<!-- Tiles -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
-		    <artifactId>tiles-core</artifactId>
+		    <artifactId>tiles-extras</artifactId>
 		    <version>${tiles-version}</version>
 		</dependency>
 		<dependency>
@@ -217,6 +218,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- tag::plugin[] -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+                </configuration>
+            </plugin>
+            <!-- end::plugin[] -->
 		</plugins>
 	</build>
 

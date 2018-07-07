@@ -11,15 +11,15 @@
 </head>
 <body oncontextmenu="return true" ondragstart="return true" onselectstart="return true">
 	<div id="layoutHeader">
-		<tiles:insertAttribute name="header" />
+		<tiles:insertAttribute name="header" ignore="true"/>
 	</div>
 	<div id="layoutBody">
 		<div id="sidebar">
-			<tiles:insertAttribute name="sidebar" />
+			<tiles:insertAttribute name="sidebar" ignore="true"/>
 		</div>
 
 		<div id="content">
-				<tiles:insertAttribute name="content" />
+				<tiles:insertAttribute name="content" ignore="true"/>
 		</div>
 	</div>
 </body>

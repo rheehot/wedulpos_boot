@@ -25,13 +25,10 @@ const choices = new Choices(messageTargetInput, {
   },
 });
 
-messageTargetInput.addEventListener('addItem', (event) => {
-  // do something creative here...
-  console.log(event.detail.id);
-  console.log(event.detail.value);
-  console.log(event.detail.label);
-  console.log(event.detail.groupValue);
+messageTargetInput.addEventListener('addItem', () => {
   //choices.removeItemsByValue(event.detail.value);
+  $messageBox.attr('disabled', false);
+
 }, false);
 
 messageTargetInput.addEventListener('removeItem', (event) => {
@@ -41,19 +38,8 @@ messageTargetInput.addEventListener('removeItem', (event) => {
       {value: event.detail.value, label: event.detail.label}
     ]);
   }
-
-  // do something creative here...
-  console.log(event.detail.id);
-  console.log(event.detail.value);
-  console.log(event.detail.label);
-  console.log(event.detail.groupValue);
-
+  $messageBox.attr('disabled', true);
 }, false);
-
-// 채팅 열기
-// const openChatRoom = function() {
-//
-// };
 
 // 2. connection이 맺어지면 실행된다.
 client.connect({}, function () {
@@ -62,7 +48,7 @@ client.connect({}, function () {
   // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
   client.subscribe('/subscribe/chat/room/' + $('.content').data('room-id'), function (chat) {
     let content = JSON.parse(chat.body);
-    $chatBox.append('<li>' + content.message + '(' + content.writer + ')</li>');
+    $chatBox.append('<div class="chatMessage">' + content.message + '(' + content.writer + ')</div>');
     $messageTextBox.scrollTop($messageTextBox[0].scrollHeight);
   });
 });

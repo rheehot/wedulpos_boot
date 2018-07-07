@@ -11,12 +11,12 @@
 	</div>
   <div id="messageArea">
     <div id="messageTextBox">
-      <ul class="chatBox">
-      </ul>
+      <div class="chatBox">
+      </div>
     </div>
 
     <div id="messageTargetInputBox">
-      <textarea id="messageBox" rows="4" cols="50" class="form-control">
+      <textarea id="messageBox" disabled rows="4" cols="50" class="form-control">
       </textarea>
       <button id="messageBoxBtn" class="btn btn-lg btn-primary btn-block send">보내기</button>
     </div>

@@ -18,7 +18,9 @@
    </definition>
    
    	<!-- 에러 페이지 -->
-	<definition name="error" template="/WEB-INF/views/error/error.jsp" />
+	<definition name="error" template="/WEB-INF/views/error/error.jsp" >
+		<put-attribute name="title" value="err page" />
+	</definition>
    
 	<!-- 홈 -->   
    <definition name="main" extends="threeLayout">		

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
@@ -80,6 +81,7 @@ public class RootApplicationContextConfig {
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource , ApplicationContext applicationContext) throws Exception { 
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
+		sessionFactory.setVfs(SpringBootVFS.class);
 		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mapper/**/*.xml"));
 		sessionFactory.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
         return sessionFactory.getObject();
