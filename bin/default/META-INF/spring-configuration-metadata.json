@@ -1,0 +1,37 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager",
+      "type": "com.wedul.common.config.ServletContextConfig$ManagerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager.email-host",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager.email-id",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager.email-password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager.email-port",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.wedul.common.config.ServletContextConfig$ManagerProperties",
+      "name": "manager.email-protocol",
+      "type": "java.lang.String"
+    }
+  ]
+}

@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.wedul.*", "com.wedul.common.interceptor" })
+@ComponentScan(basePackages = {"com.wedul.*", "com.wedul.common.interceptor"})
 public class WedulposApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WedulposApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WedulposApplication.class, args);
+    }
 }

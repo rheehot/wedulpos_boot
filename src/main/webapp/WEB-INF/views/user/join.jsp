@@ -35,6 +35,14 @@
     <input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="user.login.message.password"/>" required="">
     <input type="password" id="passwordCheck" name="passwordCheck" class="form-control" placeholder="<spring:message code="user.login.message.passwordCheck"/>" required="">
     <button id="joinBtn" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.message.join"/></button>
+  
+  	<!-- ¼Ò¼È·Î±×ÀÎ oauth -->
+  	<div>
+  		<!-- kakao -->
+  		<div>
+  			<span id="" class="oauthIcon"></span>
+  		</div>
+  	</div>
   </form>
 </div>
 
