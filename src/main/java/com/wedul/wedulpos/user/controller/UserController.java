@@ -2,102 +2,100 @@ package com.wedul.wedulpos.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wedul.wedulpos.user.dto.UserDto;
 import com.wedul.wedulpos.user.service.UserService;
+import org.springframework.web.context.annotation.RequestScope;
 
 /**
  * User관련 컨트롤러
- * 
- * @author wedul
  *
+ * @author wedul
  */
 @RestController
 @RequestMapping(value = "/user", method = RequestMethod.POST)
 public class UserController {
-	
-	@Autowired
-	UserService userService;
 
-	/**
-	 * 회원가입
-	 * 
-	 * @param user
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/join")
-	public ResponseEntity<?> join(
-			@RequestParam String nickname,
-			@RequestParam String email,
-			@RequestParam String password) throws Exception {
-		return ResponseEntity.ok(userService.insertUser(new UserDto(email.trim(), password.trim(), nickname.trim(), false)));
-	}
-	
-	/**
-	 * 이메일 인증 요청 
-	 * 
-	 * @param email
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/email")
-	public ResponseEntity<?> checkEmail(String email) throws Exception {
-		return ResponseEntity.ok(userService.checkEmail(email.trim()));
-	}
-	
-	/**
-	 * nickname check
-	 * 
-	 * @param nickName
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/nickname")
-	public ResponseEntity<?> checkNickName(String nickname) throws Exception {
-		return ResponseEntity.ok(userService.checkNickname(nickname.trim()));
-	}
-	
-	/**
-	 * 임시 비밀번호 발급
-	 * 
-	 * @param email
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/send/temppw")
-	public ResponseEntity<?> createTempPw(String email) throws Exception {
-		return ResponseEntity.ok(userService.createTempPassword(email.trim()));
-	}
-	
-	/**
-	 * 인증번호 확인 
-	 * 
-	 * @param otp
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/cert/check")
-	public ResponseEntity<?> checkCert(String otp) throws Exception {
-		return ResponseEntity.ok(userService.checkCert(otp.trim()));
-	}
-	
-	/**
-	 * 패스워드 초기화 
-	 * 
-	 * @param email
-	 * @param password
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/password")
-	public ResponseEntity<?> changePassword(
-			@RequestParam String email,
-			@RequestParam String password) throws Exception {
-		return ResponseEntity.ok(userService.changePassword(email.trim(), password.trim()));
-	}
+    @Autowired
+    UserService userService;
+
+    /**
+     * 회원가입
+     *
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/join")
+    public ResponseEntity<?> join(
+            @RequestParam String nickname,
+            @RequestParam String email,
+            @RequestParam String password) throws Exception {
+        return ResponseEntity.ok(userService.insertUser(new UserDto(email.trim(), password.trim(), nickname.trim(), false)));
+    }
+
+    /**
+     * 이메일 인증 요청
+     *
+     * @param email
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/email")
+    public ResponseEntity<?> checkEmail(String email) throws Exception {
+        return ResponseEntity.ok(userService.checkEmail(email.trim()));
+    }
+
+    /**
+     * nickname check
+     *
+     * @param nickName
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/nickname")
+    public ResponseEntity<?> checkNickName(String nickname) throws Exception {
+        return ResponseEntity.ok(userService.checkNickname(nickname.trim()));
+    }
+
+    /**
+     * 임시 비밀번호 발급
+     *
+     * @param email
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/send/temppw")
+    public ResponseEntity<?> createTempPw(String email) throws Exception {
+        return ResponseEntity.ok(userService.createTempPassword(email.trim()));
+    }
+
+    /**
+     * 인증번호 확인
+     *
+     * @param otp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/cert/check")
+    public ResponseEntity<?> checkCert(String otp) throws Exception {
+        return ResponseEntity.ok(userService.checkCert(otp.trim()));
+    }
+
+    /**
+     * 패스워드 초기화
+     *
+     * @param email
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/password")
+    public ResponseEntity<?> changePassword(
+            @RequestParam String email,
+            @RequestParam String password) throws Exception {
+        return ResponseEntity.ok(userService.changePassword(email.trim(), password.trim()));
+    }
+
 }
