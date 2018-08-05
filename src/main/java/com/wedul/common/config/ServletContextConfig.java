@@ -1,5 +1,7 @@
 package com.wedul.common.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wedul.common.interceptor.AlwaysInterceptor;
 import com.wedul.common.util.AES256Cipher;
 import com.wedul.wedulpos.variables.service.VariablesServiceImpl;
@@ -45,6 +47,15 @@ public class ServletContextConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/dist/**").addResourceLocations("/dist/");
+
+		registry.addResourceHandler("/resources/**")
+				.addResourceLocations("/WEB-INF/resources/");
+
+		registry.addResourceHandler("swagger-ui.html")
+				.addResourceLocations("classpath:/META-INF/resources/");
+
+		registry.addResourceHandler("/webjars/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 
 	@Override
@@ -74,6 +85,9 @@ public class ServletContextConfig implements WebMvcConfigurer {
 	@Bean
 	public MappingJackson2HttpMessageConverter converter() {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		ObjectMapper objectMapper = new ObjectMapper()
+				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		converter.setObjectMapper(objectMapper);
 		return converter;
 	}
 	
