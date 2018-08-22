@@ -33,7 +33,40 @@ const token_header = $("meta[name='_csrf_header']").attr("content");
 const $userInfoId = $('#userInfoId');
 const $userInfoPasswd = $('#userInfoPasswd');
 const $userInfoPasswdConfirm = $('#userInfoPasswdConfirm');
-const $userInfoForm = $('#userInfoForm');
+const $loginType = $('#loginType');
+
+window.fbAsyncInit = function() {
+
+    FB.init({
+        appId      : '255697038387228',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v3.1' // use graph api version 2.8
+    });
+    // Now that we've initialized the JavaScript SDK, we call
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
+
+    FB.AppEvents.logPageView();
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 
 // 날씨 표시
 const weatherDisplay = () => {
@@ -49,23 +82,55 @@ const weatherDisplay = () => {
   });
 };
 
-$logoutButton.click(() => {
-  if (confirm(Common.getMessage('common.message.account.logout'))) {
+// 페이스북 계정 로그아웃
+var faceBookLogOut = function(callback) {
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+          FB.logout(function(response) {
+              callback();
+          });
+      } else {
+          callback();
+      }
+    });
+};
+
+// logout;
+var logout = function() {
     let param = {};
     param[`${token_header}`] = token;
 
     // 로그아웃
     Common.sendAjax({
-      url: Common.getFullPath('user/logout'),
-      type: 'POST',
-      param,
-      success: () => {
-        Common.pageMove('');
-      },
-      failed: () => {
-        alert(Common.getMessage('common.message.fail'));
-      }
+        url: Common.getFullPath('user/logout'),
+        type: 'POST',
+        param,
+        success: () => {
+            Common.pageMove('');
+        },
+        failed: () => {
+            alert(Common.getMessage('common.message.fail'));
+        }
     });
+};
+
+// logout button 클릭 시
+$logoutButton.click(() => {
+  if (confirm(Common.getMessage('common.message.account.logout'))) {
+    let loginType = $loginType.val();
+
+    console.log(loginType);
+    switch (loginType) {
+        case 'FACE_BOOK':
+            alert(loginType);
+            faceBookLogOut(logout);
+            break;
+
+        case 'NORMAL':
+        default:
+          logout();
+          break;
+    }
   }
 });
 

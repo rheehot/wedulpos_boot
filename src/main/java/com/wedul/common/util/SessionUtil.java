@@ -3,6 +3,7 @@ package com.wedul.common.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.wedul.wedulpos.user.dto.EnumLoginType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -88,6 +89,18 @@ public enum SessionUtil {
             return ((MyAuthenticaion) authentication).getUser();
         return null;
     }
+
+	/**
+	 * Gets login type.
+	 *
+	 * @return the login type
+	 */
+	public static EnumLoginType getLoginType() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication instanceof MyAuthenticaion)
+			return ((MyAuthenticaion) authentication).getLoginType();
+		return null;
+	}
 
     /**
      * 현재 로그인된 유저 설정

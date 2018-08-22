@@ -5,45 +5,49 @@ import org.apache.ibatis.annotations.Mapper;
 import com.wedul.wedulpos.user.dto.UserDto;
 import com.wedul.wedulpos.user.dto.UserOtpDto;
 
+/**
+ * The interface User mapper.
+ */
 @Mapper
 public interface UserMapper {
 
 	/**
 	 * 사용자 조회
-	 * 
-	 * @param user
-	 * @return
+	 *
+	 * @param user the user
+	 * @return user dto
 	 */
-	public UserDto selectUser(UserDto user);
-	
+	UserDto selectUser(UserDto user);
+
 	/**
 	 * 사용자 입력
-	 * 
-	 * @param user
+	 *
+	 * @param user the user
+	 * @return the int
 	 */
-	public int insertUser(UserDto user);
-	
+	int insertUser(UserDto user);
+
 	/**
 	 * 사용자 OTP 입력
-	 * 
-	 * @param dto
+	 *
+	 * @param dto the dto
 	 */
-	public void insertUserOtp(UserOtpDto dto);
-	
+	void insertUserOtp(UserOtpDto dto);
+
 	/**
 	 * 사용자 OTP 제거
-	 * 
-	 * @param dto
-	 * @return
+	 *
+	 * @param dto the dto
+	 * @return int
 	 */
-	public int deleteUserOtp(UserOtpDto dto);
-	
+	int deleteUserOtp(UserOtpDto dto);
+
 	/**
 	 * 임시 비밀번호 업데이트
-	 * 
-	 * @param dto
-	 * @return
+	 *
+	 * @param dto the dto
+	 * @return int
 	 */
-	public int updateTempPw(UserDto dto);
+	int updateTempPw(UserDto dto);
 
 }

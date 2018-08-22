@@ -2,30 +2,27 @@ package com.wedul.wedulpos.user.dto;
 
 import java.util.List;
 
+import lombok.Data;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author wedul
+ * The type My authenticaion.
  *
+ * @author wedul
  */
+@Data
 public class MyAuthenticaion extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
 
 	UserDto user;
+	EnumLoginType loginType;
 
-	public MyAuthenticaion(String id, String password, List<GrantedAuthority> grantedAuthorityList, UserDto user) {
+	public MyAuthenticaion(String id, String password, List<GrantedAuthority> grantedAuthorityList, UserDto user, EnumLoginType loginType) {
 		super(id, password, grantedAuthorityList);
 		this.user = user;
-	}
-
-	public UserDto getUser() {
-		return user;
-	}
-
-	public void setUser(UserDto user) {
-		this.user = user;
+		this.loginType = loginType;
 	}
 
 }

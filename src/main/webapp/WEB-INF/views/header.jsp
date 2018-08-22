@@ -23,6 +23,8 @@
 
   <!-- login after area -->
   <input type="hidden" id="loginUser" value="${loginUser}"/>
+  <input type="hidden" id="loginType" value="${loginType}"/>
+
   <div id="loginAfterArea" class="loginArea ${fn:length(loginUser) > 0 ? '' : 'displayNone'}">
     <div id="loginUserIdBox">
 	    <span class="far fa-user"></span>

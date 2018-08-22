@@ -1,18 +1,30 @@
 package com.wedul.wedulpos.user.serviceImpl;
 
+import com.google.common.collect.Lists;
+import com.wedul.common.config.SpringSecurityConfig;
+import com.wedul.common.dto.ResultDto;
+import com.wedul.common.util.Constant;
+import com.wedul.wedulpos.user.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
 import com.wedul.common.util.CommonUtils;
 import com.wedul.common.util.MailUtil;
 import com.wedul.common.util.MessageBundleUtil;
 import com.wedul.wedulpos.user.dao.UserMapper;
-import com.wedul.wedulpos.user.dto.EnumOtpType;
-import com.wedul.wedulpos.user.dto.UserDto;
-import com.wedul.wedulpos.user.dto.UserOtpDto;
 import com.wedul.wedulpos.user.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 /**
  * 사용자 관련 작업을 진행하는 서비스
@@ -34,6 +46,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	MailUtil mailUtil;
 
+	@Autowired
+	AuthProvider authProvider;
+
 	@Override
 	public UserDto selectUser(UserDto user) {
 		return userDao.selectUser(user);
@@ -42,6 +57,44 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean insertUser(UserDto user) throws Exception {
 		return userDao.insertUser(user) > 0;
+	}
+
+	private UserDto insertSnsUser(UserDto reqDto) throws Exception {
+		UserDto userDto = selectUser(reqDto);
+
+		if (null == userDto) {
+			if (insertUser(reqDto)) {
+				return reqDto;
+			} else {
+				return null;
+			}
+		}
+
+		return userDto;
+	}
+
+	@Override
+	public ResultDto facebookLogin(HttpServletRequest request, UserDto reqDto) throws Exception {
+		UserDto userDto = insertSnsUser(reqDto);
+
+		if (null == userDto) {
+			return ResultDto.fail("등록된 사용자가 없습니다.");
+		}
+
+		// 인증 토큰 생성
+		MyAuthenticaion token = new MyAuthenticaion(userDto.getSnsId(), "", Arrays.asList(new SimpleGrantedAuthority(Constant.ROLE_TYPE.ROLE_USER.toString())), userDto, EnumLoginType.FACE_BOOK);
+		token.setDetails(new WebAuthenticationDetails(request));
+		authProvider.authenticate(token);
+
+		// Security Context에 인증 토큰 셋팅
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(token);
+
+        // Create a new session and add the security context.
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+		return ResultDto.success();
 	}
 
 	@Override
@@ -64,7 +117,7 @@ public class UserServiceImpl implements UserService {
 			return messageBundleUtil.getMessage("user.join.message.failEmail");
 		}
 	}
-	
+
 	@Override
 	public String checkNickname(String nickname) {
 		try {

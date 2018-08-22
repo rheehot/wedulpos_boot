@@ -3,6 +3,7 @@ package com.wedul.wedulpos.user.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wedul.wedulpos.user.dto.EnumLoginType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,23 +36,28 @@ public class AuthProvider implements AuthenticationProvider  {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String id = authentication.getName();
 		String password = HashUtil.sha256(authentication.getCredentials().toString());
-		
-		UserDto user = userService.selectUser(new UserDto(id));
-		
-		// email에 맞는 user가 없거나 비밀번호가 맞지 않는 경우.
-		if (null == user || !user.getPassword().equals(password)) {
-			return null;
+		UserDto user;
+
+		if (authentication instanceof MyAuthenticaion) {
+			return (MyAuthenticaion) authentication;
+		} else {
+			user = userService.selectUser(new UserDto(id));
+
+			// email에 맞는 user가 없거나 비밀번호가 맞지 않는 경우.
+			if (null == user || !user.getPassword().equals(password)) {
+				return null;
+			}
 		}
-		
+
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
 		
-		if (user.isIsadmin()) {
+		if (user.isAdmin()) {
 			grantedAuthorityList.add(new SimpleGrantedAuthority(Constant.ROLE_TYPE.ROLE_ADMIN.toString()));
 		} else {
 			grantedAuthorityList.add(new SimpleGrantedAuthority(Constant.ROLE_TYPE.ROLE_USER.toString()));
 		}
 
-		return new MyAuthenticaion(id, password, grantedAuthorityList, user);
+		return new MyAuthenticaion(id, password, grantedAuthorityList, user, EnumLoginType.NORMAL);
 	}
 	
 	@Override

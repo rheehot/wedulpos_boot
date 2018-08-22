@@ -1,5 +1,7 @@
 package com.wedul.wedulpos.user.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 import com.wedul.common.dto.CommonDto;
@@ -17,14 +19,15 @@ import lombok.EqualsAndHashCode;
  */
 @Alias("UserDto")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 public class UserDto extends CommonDto {
 	private String nickname;
 	private String email;
-	private String password;
-	private boolean isadmin;
-	
-	public UserDto() {}
+	private String password = "";
+	private String snsId;
+	private boolean isAdmin = false;
 	
 	public UserDto(String email) {
 		this.email = email;
@@ -35,17 +38,17 @@ public class UserDto extends CommonDto {
 		this.password = password;
 	}
 	
-	public UserDto(String email, String password, boolean isadmin) {
+	public UserDto(String email, String password, boolean isAdmin) {
 		this.email = email;
 		this.password = password;
-		this.isadmin = isadmin;
+		this.isAdmin = isAdmin;
 	}
 	
-	public UserDto(String email, String password, String nickname, boolean isadmin) {
+	public UserDto(String email, String password, String nickname, boolean isAdmin) {
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
-		this.isadmin = isadmin;
+		this.isAdmin = isAdmin;
 	}
 	
 	public String getEcPassword() {

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wedul.common.interceptor.AlwaysInterceptor;
 import com.wedul.common.util.AES256Cipher;
 import com.wedul.wedulpos.variables.service.VariablesServiceImpl;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -90,7 +91,8 @@ public class ServletContextConfig implements WebMvcConfigurer {
 		converter.setObjectMapper(objectMapper);
 		return converter;
 	}
-	
+
+	@Data
 	@Component
 	@ConfigurationProperties(prefix = "manager")
 	public static class ManagerProperties {
@@ -99,47 +101,6 @@ public class ServletContextConfig implements WebMvcConfigurer {
 		private String emailId;
 		private String emailPassword;
 		private String emailProtocol;
-
-		public String getEmailHost() {
-			return emailHost;
-		}
-
-		public void setEmailHost(String emailHost) {
-			this.emailHost = emailHost;
-		}
-
-		public int getEmailPort() {
-			return emailPort;
-		}
-
-		public void setEmailPort(int emailPort) {
-			this.emailPort = emailPort;
-		}
-
-		public String getEmailId() {
-			return emailId;
-		}
-
-		public void setEmailId(String emailId) {
-			this.emailId = emailId;
-		}
-
-		public String getEmailPassword() {
-			return emailPassword;
-		}
-
-		public void setEmailPassword(String emailPassword) {
-			this.emailPassword = emailPassword;
-		}
-
-		public String getEmailProtocol() {
-			return emailProtocol;
-		}
-
-		public void setEmailProtocol(String emailProtocol) {
-			this.emailProtocol = emailProtocol;
-		}
-
 	}
 	
 	@Autowired

@@ -1,12 +1,13 @@
 package com.wedul.wedulpos.user.controller;
 
+import com.wedul.wedulpos.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.wedul.wedulpos.user.dto.UserDto;
 import com.wedul.wedulpos.user.service.UserService;
-import org.springframework.web.context.annotation.RequestScope;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * User관련 컨트롤러
@@ -23,16 +24,25 @@ public class UserController {
     /**
      * 회원가입
      *
-     * @param user
+     * @param reqDto
      * @return
      * @throws Exception
      */
     @RequestMapping("/join")
-    public ResponseEntity<?> join(
-            @RequestParam String nickname,
-            @RequestParam String email,
-            @RequestParam String password) throws Exception {
-        return ResponseEntity.ok(userService.insertUser(new UserDto(email.trim(), password.trim(), nickname.trim(), false)));
+    public ResponseEntity<?> join(UserDto reqDto) throws Exception {
+        return ResponseEntity.ok(userService.insertUser(reqDto));
+    }
+
+    /**
+     * facebook으로 로그인
+     *
+     * @param reqDto the req dto
+     * @return the response entity
+     * @throws Exception the exception
+     */
+    @RequestMapping("/login/facebook")
+    public ResponseEntity<?> loginfacebook(HttpServletRequest request, UserDto reqDto) throws Exception {
+        return ResponseEntity.ok(userService.facebookLogin(request, reqDto));
     }
 
     /**
@@ -50,7 +60,7 @@ public class UserController {
     /**
      * nickname check
      *
-     * @param nickName
+     * @param nickname
      * @return
      * @throws Exception
      */

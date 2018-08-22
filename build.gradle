@@ -63,6 +63,7 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.5.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.5.0'
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+    compile group: 'org.springframework.social', name: 'spring-social-facebook', version: '2.0.3.RELEASE'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.4.RELEASE'
     testCompile group: 'org.springframework.security', name: 'spring-security-test', version:'5.0.4.RELEASE'
     providedCompile group: 'org.projectlombok', name: 'lombok', version:'1.16.20'

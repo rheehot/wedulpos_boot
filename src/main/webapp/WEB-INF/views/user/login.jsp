@@ -11,7 +11,8 @@
     <input type="email" id="email" name="id" class="form-control" placeholder="<spring:message code="user.login.message.email"/>" required="">
     <label for="inputPassword" class="sr-only"><spring:message code="user.login.message.password"/></label>
     <input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="user.login.message.password"/>" required="">
-    <button id="loginBtn" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.message.login"/></button>
+    <button id="loginBtn" class="loginBtn btn btn-lg btn-primary btn-block" type="submit"><spring:message code="user.login.message.login"/></button>
+    <button id="faceBookLogin" class="loginBtn btn btn-lg btn-primary btn-block"><i class="fab fa-facebook"></i><span> <spring:message code="user.login.message.facebook"/></span></button>
     <br>
     <div class="login-help">
       <a href="/user/join" class="signup"><spring:message code="user.login.message.join"/></a>

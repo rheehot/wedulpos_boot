@@ -35,7 +35,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /(validate|choices|node_modules|spin|jquery|stomp-websocket|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
+        exclude: /(validate|login|choices|node_modules|spin|jquery|stomp-websocket|jstree|multi-select|common|fontawesome|menu|header|bootstrap|jquery-validate|tether)/
       },
       {
         test: /\.js$/,  // es5 문법에서도 적용되도록 수정

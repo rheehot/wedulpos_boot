@@ -1,16 +1,16 @@
 package com.wedul.common.config;
 
+import com.wedul.wedulpos.user.serviceImpl.AuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import com.wedul.wedulpos.user.serviceImpl.AuthProvider;
 
 /**
  * Security Configuration
@@ -39,15 +39,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/resources/**", 
 								   "/dist/**", 
 								   "/weather", 
-								   "/user/password/find",
 								   "/user/join",
-								   "/user/email",
-								   "/user/nickname",
-								   "/user/send/temppw",
-								   "/findpw", 
-								   "/user/findpw",
-								   "/user/cert/check",
-								   "/join", 
+                                   "/user/email",
+                                   "/user/nickname",
+                                   "/user/send/temppw",
+                                   "/user/cert/check",
+                                   "/user/password",
+								   "/user/login/**",
+								   "/findpw",
+								   "/join",
 								   "/getLanguage/**",
 								   "/getMessage"); // #3
 	}
@@ -70,7 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .successHandler(authSuccessHandler)
 			.usernameParameter("id")
 			.passwordParameter("password")
-		.and()	
+		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
 	        .logoutSuccessUrl("/")
 	        .invalidateHttpSession(true)
